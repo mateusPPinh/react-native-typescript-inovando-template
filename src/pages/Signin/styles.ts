@@ -30,15 +30,20 @@ export const Input = styled.TextInput.attrs({
   width: 300px;
   border-radius: 4px;
   padding: 5px 15px;
+  font-family: 'Roboto-Regular';
+  font-size: 14px;
 `;
 
 export const ForgotPasswordButtton = styled.TouchableOpacity`
   margin-left: auto;
   margin-top: 4px;
-  color: #333;
 `;
 
-export const ForgotPasswordButtonText = styled.Text``;
+export const ForgotPasswordButtonText = styled.Text`
+  font-family: 'Roboto-Regular';
+  font-size: 13px;
+  color: #313131;
+`;
 
 export const LoginButton = styled.TouchableOpacity`
   align-items: center;
@@ -51,4 +56,6 @@ export const LoginButton = styled.TouchableOpacity`
 
 export const LoginButtonText = styled.Text`
   color: #ffff;
+  font-family: 'Roboto-Regular';
+  font-size: 16px;
 `;
