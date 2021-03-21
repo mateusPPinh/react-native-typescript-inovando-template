@@ -1,4 +1,11 @@
-import React, { useEffect, useRef } from 'react';
+import React, {
+  useEffect,
+  useCallback,
+  useState,
+  useRef,
+  useImperativeHandle,
+  forwardRef,
+} from 'react';
 import { TextInputProps } from 'react-native';
 import { useField } from '@unform/core';
 
@@ -13,10 +20,37 @@ interface InputValueReference {
   value: string;
 }
 
-const Input: React.FC<InputProps> = ({ name, icon, ...rest }) => {
+interface InputRef {
+  focus(): void;
+}
+
+const Input: React.RefForwardingComponent<InputRef, InputProps> = (
+  { name, icon, ...rest },
+  ref,
+) => {
   const inputElementRef = useRef<any>(null);
+
   const { registerField, defaultValue = '', fieldName, error } = useField(name);
   const inputValueRef = useRef<InputValueReference>({ value: defaultValue });
+
+  const [isFocused, setIsFocused] = useState(false);
+  const [isFilled, setIsFilled] = useState(false);
+
+  const handleInputFocus = useCallback(() => {
+    setIsFocused(true);
+  }, []);
+
+  const handleInputBlur = useCallback(() => {
+    setIsFocused(false);
+
+    setIsFilled(!!inputValueRef.current.value);
+  }, []);
+
+  useImperativeHandle(ref, () => ({
+    focus() {
+      inputElementRef.current.focus();
+    },
+  }));
 
   useEffect(() => {
     registerField<string>({
@@ -35,12 +69,22 @@ const Input: React.FC<InputProps> = ({ name, icon, ...rest }) => {
   }, [fieldName, registerField]);
 
   return (
-    <Container>
-      <Icon name={icon} size={20} color="#e8e8e8" />
+    <Container isFocused={isFocused} isErrored={!!error} isFilled={isFilled}>
+      <Icon
+        name={icon}
+        size={20}
+        color={
+          // eslint-disable-next-line no-nested-ternary
+          isFocused || isFilled ? '#21a179' : error ? '#c53030' : '#666360'
+        }
+      />
       <TextInput
         ref={inputElementRef}
         keyboardAppearance="dark"
+        placeholderTextColor="#666360"
         defaultValue={defaultValue}
+        onFocus={handleInputFocus}
+        onBlur={handleInputBlur}
         onChangeText={value => {
           inputValueRef.current.value = value;
         }}
@@ -50,4 +94,4 @@ const Input: React.FC<InputProps> = ({ name, icon, ...rest }) => {
   );
 };
 
-export default Input;
+export default forwardRef(Input);
