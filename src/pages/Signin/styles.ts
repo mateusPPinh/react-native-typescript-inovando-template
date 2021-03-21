@@ -15,7 +15,7 @@ export const Logo = styled.Image`
   margin-bottom: 20px;
 `;
 
-export const Form = styled.View`
+export const FormContainer = styled.View`
   flex-direction: column;
 `;
 
