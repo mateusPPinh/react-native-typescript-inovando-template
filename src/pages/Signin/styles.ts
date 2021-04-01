@@ -1,22 +1,6 @@
 import styled from 'styled-components/native';
 
 export const Container = styled.View`
-  flex: 1;
-  background: #fdfffc;
-  padding: 0 30px;
-  justify-content: center;
   align-items: center;
+  margin-bottom: 40px;
 `;
-
-export const Logo = styled.Image`
-  width: 150px;
-  height: 120px;
-  resize-mode: contain;
-  margin-bottom: 20px;
-`;
-
-export const ForgotPasswordButton = styled.TouchableOpacity`
-  margin-top: 20px;
-`;
-
-export const ForgotText = styled.Text``;

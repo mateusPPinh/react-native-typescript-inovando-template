@@ -1,11 +1,12 @@
 import styled from 'styled-components/native';
 import { RectButton } from 'react-native-gesture-handler';
+import { Field } from 'formik';
 
 export const Container = styled.View`
   flex-direction: column;
 `;
 
-export const Input = styled.TextInput.attrs({
+export const Input = styled(Field).attrs({
   placeholderTextColor: '#333',
 })`
   background: #c9cad9;

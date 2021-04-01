@@ -1,28 +1,28 @@
-import React, { useCallback } from 'react';
-import { useNavigation } from '@react-navigation/native';
+import React from 'react';
+import { Image } from 'react-native';
+import LoginForm from '../../forms/SignIn';
+import FormView from '../../styles/FormView';
 
-import { Container, Logo, ForgotPasswordButton, ForgotText } from './styles';
-import SignInForm from '../../forms/SignIn';
+import { Container } from './styles';
 
-import inovandoLogo from '../../assets/inovando-logo-full.png';
-
-const Signin: React.FC = () => {
-  const navigation = useNavigation();
-
-  const handleForgotPassword = useCallback(() => {
-    navigation.navigate('Forgot');
-  }, [navigation]);
+const Login = ({ navigation }): any => {
+  function handleSignIn(values: any): void {
+    console.log(values);
+  }
 
   return (
-    <Container>
-      <Logo source={inovandoLogo} />
-
-      <SignInForm />
-      <ForgotPasswordButton onPress={handleForgotPassword}>
-        <ForgotText>Esqueci minha senha</ForgotText>
-      </ForgotPasswordButton>
-    </Container>
+    <FormView>
+      <Container>
+        <Image
+          // eslint-disable-next-line global-require
+          source={require('../../assets/inovando-logo-full.png')}
+          style={{ width: 150, height: 120 }}
+          resizeMode="contain"
+        />
+      </Container>
+      <LoginForm navigation={navigation} onSubmit={handleSignIn} />
+    </FormView>
   );
 };
 
-export default Signin;
+export default Login;
