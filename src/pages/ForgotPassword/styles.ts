@@ -14,9 +14,3 @@ export const Logo = styled.Image`
   resize-mode: contain;
   margin-bottom: 20px;
 `;
-
-export const ForgotPasswordButton = styled.TouchableOpacity`
-  margin-top: 20px;
-`;
-
-export const ForgotText = styled.Text``;
