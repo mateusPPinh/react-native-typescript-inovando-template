@@ -4,11 +4,15 @@ import { NavigationContainer } from '@react-navigation/native';
 import theme from './src/config/theme.json';
 import Routes from './src/routes/index';
 
+import { AuthProvider } from './src/contexts/auth';
+
 const App: React.FC = () => (
   <NavigationContainer>
-    <ThemeProvider theme={theme}>
-      <Routes />
-    </ThemeProvider>
+    <AuthProvider>
+      <ThemeProvider theme={theme}>
+        <Routes />
+      </ThemeProvider>
+    </AuthProvider>
   </NavigationContainer>
 );
 
