@@ -4,10 +4,14 @@ import LoginForm from '../../forms/SignIn';
 import FormView from '../../styles/FormView';
 
 import { Container } from './styles';
+import { AuthContext } from '../../contexts/auth';
 
 const Login = ({ navigation }): any => {
+  const { signIn } = useContext(AuthContext);
+
   function handleSignIn(values: any): void {
     console.log(values);
+    signIn();
   }
 
   return (
